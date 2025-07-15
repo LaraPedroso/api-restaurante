@@ -1,5 +1,1 @@
-# Ignorar dependências
 node_modules/
-
-# Ignorar o próprio arquivo .gitignore
-.gitignore
