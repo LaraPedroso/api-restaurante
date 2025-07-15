@@ -1,8 +1,5 @@
+# Ignorar dependências
+node_modules/
 
-./node_modules
-.DS_Store
-.env
-dist
-.idea
-.vscode
-*.log
+# Ignorar o próprio arquivo .gitignore
+.gitignore
