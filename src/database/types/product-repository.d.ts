@@ -2,6 +2,6 @@ type ProductRepository = {
     id: string;
     name: string;
     price: number;
-    createdAt: number;
-    updatedAt: number;
+    created_at: number;
+    updated_at: number;
 };
