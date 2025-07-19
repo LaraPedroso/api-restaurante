@@ -4,6 +4,23 @@ import knex from "knex";
 import z from "zod";
 
 class OrdersController {
+    async index(request: Request, response: Response, next: NextFunction) {
+        try {
+            const { table_session_id } = request.params;
+            const order = await knex("orders")
+                .select(
+                    "orders.id",
+                    "orders.table_session_id",
+                    "orders.product_id",
+                    "products.name",
+                    "orders.price",
+                    "orders.quantity"
+                )
+                .join("products", "products.id", "orders.product_id")
+                .where({ table_session_id });
+        } catch (error) {}
+    }
+
     async create(request: Request, response: Response, next: NextFunction) {
         try {
             const bodySchema = z.object({
@@ -36,6 +53,13 @@ class OrdersController {
             if (!product) {
                 throw new AppError("product not found");
             }
+
+            await knex<OrderRepository>("orders").insert({
+                product_id,
+                table_session_id,
+                quantity,
+                price: product.price,
+            });
 
             return response.status(201).json();
         } catch (error) {
