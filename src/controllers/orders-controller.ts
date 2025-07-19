@@ -1,6 +1,6 @@
+import knex from "@/database/knex";
 import { AppError } from "@/utils/AppError";
 import { NextFunction, Request, Response } from "express";
-import knex from "knex";
 import z from "zod";
 
 class OrdersController {
@@ -14,10 +14,14 @@ class OrdersController {
                     "orders.product_id",
                     "products.name",
                     "orders.price",
-                    "orders.quantity"
+                    "orders.quantity",
+                    knex.raw("orders.price * orders.quantity as total_price"),
+                    "orders.created_at",
+                    "orders.updated_at"
                 )
                 .join("products", "products.id", "orders.product_id")
-                .where({ table_session_id });
+                .where({ table_session_id })
+                .orderBy("orders.created_at", "desc");
         } catch (error) {}
     }
 
