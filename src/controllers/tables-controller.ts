@@ -11,32 +11,6 @@ class TablesController {
             next(error);
         }
     }
-
-    async create(request: Request, response: Response, next: NextFunction) {
-        try {
-            response.send("Table created");
-        } catch (error) {
-            next(error);
-        }
-    }
-
-    async update(request: Request, response: Response, next: NextFunction) {
-        try {
-        } catch (error) {
-            next(error);
-        }
-        const { id } = request.params;
-        response.send(`Table ${id} updated`);
-    }
-
-    async delete(request: Request, response: Response, next: NextFunction) {
-        try {
-        } catch (error) {
-            next(error);
-        }
-        const { id } = request.params;
-        response.send(`Table ${id} deleted`);
-    }
 }
 
 export { TablesController };
